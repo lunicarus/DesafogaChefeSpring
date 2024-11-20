@@ -23,6 +23,8 @@ public class Colaborator  extends User{
     @Column(nullable = false)
     private String colaboratorName;
 
+    @Column(nullable = false, unique = true)
+    private String CPF;
 
 }
 
