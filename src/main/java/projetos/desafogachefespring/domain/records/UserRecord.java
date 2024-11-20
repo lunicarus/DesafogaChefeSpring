@@ -1,11 +1,11 @@
 package projetos.desafogachefespring.domain.records;
 
-public record userRecord( Long id,
-                          String login,
-                          String password,
-                          Boolean isAdmin
+public record UserRecord(Long id,
+                         String login,
+                         String password,
+                         Boolean isAdmin
 ) {
-    public userRecord {
+    public UserRecord {
         if (login == null || login.isBlank()) {
             throw new IllegalArgumentException("Login cannot be null or blank.");
         }

@@ -21,4 +21,7 @@ public class Company {
     @JoinColumn(name = "address_id")
     private Address address;
 
+    @Column(nullable = false)
+    private String email;
+
 }

@@ -10,7 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 public class Address {
-    @Column(nullable = false)
+    @Column()
     private String number;
 
     @Column(nullable = false)
@@ -25,8 +25,6 @@ public class Address {
     @Column(nullable = false)
     private String postalCode;
 
-    @Column(nullable = false)
-    private String country;
 
     @Id
     private Long id;
@@ -35,13 +33,11 @@ public class Address {
                    String city,
                    String state,
                    String postalCode,
-                   String country,
                    String number) {
         this.street = street;
         this.city = city;
         this.state = state;
         this.postalCode = postalCode;
-        this.country = country;
         this.number = number;
     }
 
