@@ -26,8 +26,8 @@ public class Loan {
     @JoinColumn(name = "loaning_company_id", nullable = false)
     private Company loaningCompany;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "loaner_company_id", nullable = false)
+    @ManyToOne()
+    @JoinColumn(name = "loaner_company_id")
     private Company loanerCompany;
 
     @Column(nullable = false)
@@ -39,18 +39,29 @@ public class Loan {
     @Column(nullable = false)
     private double agreedPayRate;
 
+    @OneToOne(optional = false)
+    @JoinColumn(name = "loan_job_id", nullable = false)
+    private Job job;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
     private LoanStatus status;
 
     private double transportationCost = 15;
-    public Loan(Colaborator colaborator, Company loaningCompany, Company loanerCompany,
-                LocalDateTime startTime, LocalDateTime endTime, double agreedPayRate) {
+
+    public Loan(Colaborator colaborator,
+                Job job,
+                Company loaningCompany,
+                Company loanerCompany,
+                LocalDateTime startTime,
+                LocalDateTime endTime,
+                double agreedPayRate) {
         this.colaborator = colaborator;
         this.loaningCompany = loaningCompany;
         this.loanerCompany = loanerCompany;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.job = job;
         this.agreedPayRate = agreedPayRate;
         this.status = LoanStatus.PENDING;
     }
