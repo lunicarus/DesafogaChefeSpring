@@ -1,11 +1,13 @@
 package projetos.desafogachefespring.domain.services;
 
+import org.springframework.stereotype.Service;
 import projetos.desafogachefespring.domain.entities.Job;
 import projetos.desafogachefespring.domain.repositories.JobRepository;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class JobService {
 
     private final JobRepository jobRepository;

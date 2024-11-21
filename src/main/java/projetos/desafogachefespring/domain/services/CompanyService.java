@@ -1,11 +1,13 @@
 package projetos.desafogachefespring.domain.services;
 
+import org.springframework.stereotype.Service;
 import projetos.desafogachefespring.domain.entities.Company;
 import projetos.desafogachefespring.domain.repositories.CompanyRepository;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class CompanyService {
 
     private final CompanyRepository companyRepository;

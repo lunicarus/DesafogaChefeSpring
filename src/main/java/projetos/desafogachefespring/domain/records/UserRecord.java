@@ -7,7 +7,6 @@ public record UserRecord(Long id,
                          String login,
                          @NonNull
                          String password,
-                         @NonNull
                          Boolean isAdmin
 ) {
     public UserRecord {

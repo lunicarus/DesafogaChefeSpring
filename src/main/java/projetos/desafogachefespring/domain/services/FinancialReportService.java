@@ -1,5 +1,6 @@
 package projetos.desafogachefespring.domain.services;
 
+import org.springframework.stereotype.Service;
 import projetos.desafogachefespring.domain.entities.FinancialReport;
 import projetos.desafogachefespring.domain.entities.FinancialReportCalculator;
 import projetos.desafogachefespring.domain.entities.Loan;
@@ -8,6 +9,7 @@ import projetos.desafogachefespring.domain.repositories.FinancialReportRepositor
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class FinancialReportService {
 
     private final FinancialReportRepository financialReportRepository;

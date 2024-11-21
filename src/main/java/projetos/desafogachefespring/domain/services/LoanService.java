@@ -2,6 +2,7 @@ package projetos.desafogachefespring.domain.services;
 
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 import projetos.desafogachefespring.domain.entities.Loan;
 import projetos.desafogachefespring.domain.entities.LoanStatus;
 import projetos.desafogachefespring.domain.entities.Representant;
@@ -16,6 +17,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class LoanService {
 
     private final LoanRepository loanRepository;
