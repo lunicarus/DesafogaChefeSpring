@@ -14,7 +14,8 @@ public record LoanRecord(
         Job loanJob,
         LocalDateTime startTime,
         LocalDateTime endTime,
-        double agreedPayRate
+        double agreedPayRate,
+        String loanStatus
 ) {
     public LoanRecord {
         if (startTime.isBefore(LocalDateTime.now().plusMinutes(60))) 

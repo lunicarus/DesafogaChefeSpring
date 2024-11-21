@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Getter
 @Setter
@@ -20,8 +22,23 @@ public class FinancialReport {
     @JoinColumn(name = "loan_id", nullable = false)
     private Loan loan;
 
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "loaning_company_id", nullable = false)
+    private Company loaningCompany;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "loaner_company_id", nullable = false)
+    private Company loanerCompany;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "colaborator_id", nullable = false)
+    private Colaborator colaborator;
+
     @Column(nullable = false)
-    private double hoursWorked;
+    private LocalDateTime startDate;
+
+    @Column(nullable = false)
+    private LocalDateTime endDate;
 
     @Column(nullable = false)
     private double totalCost;
@@ -32,13 +49,15 @@ public class FinancialReport {
     @Column(nullable = false)
     private double extraPay;
 
-    private double transportationCost = 15.0;
+    @Column(nullable = false)
+    private double transportationCost;
 
-    public FinancialReport(Loan loan, double hoursWorked, double basePay, double extraPay) {
+    public FinancialReport(Loan loan) {
         this.loan = loan;
-        this.hoursWorked = hoursWorked;
-        this.basePay = basePay;
-        this.extraPay = extraPay;
-        this.totalCost = basePay + extraPay + transportationCost;
+        this.loaningCompany = loan.getLoaningCompany();
+        this.loanerCompany = loan.getLoanerCompany();
+        this.colaborator = loan.getColaborator();
+        this.startDate = loan.getStartTime();
+        this.endDate = loan.getEndTime();
     }
 }
