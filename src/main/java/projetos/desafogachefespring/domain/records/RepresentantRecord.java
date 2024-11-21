@@ -1,19 +1,20 @@
 package projetos.desafogachefespring.domain.records;
 
 
+import org.springframework.lang.NonNull;
 import projetos.desafogachefespring.domain.entities.Company;
 
 public record RepresentantRecord(long id,
+                                 @NonNull
                                  String name,
+                                 @NonNull
                                  Company company
                                  )
 {
     public RepresentantRecord {
-        if (name == null || name.isBlank()) {
+        if (name.isBlank()) {
             throw new IllegalArgumentException("Name cannot be null or blank.");
         }
-        if (company == null) {
-            throw new IllegalArgumentException("Company cannot be null or blank.");
-        }
+
     }
 }

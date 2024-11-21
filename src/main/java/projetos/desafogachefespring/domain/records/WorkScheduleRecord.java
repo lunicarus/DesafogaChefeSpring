@@ -1,20 +1,20 @@
 package projetos.desafogachefespring.domain.records;
 
+import org.springframework.lang.NonNull;
+
 import java.time.LocalTime;
 import java.util.Set;
 
 public record WorkScheduleRecord(
         Long id,
+        @NonNull
         LocalTime beginOfShift,
+        @NonNull
         LocalTime endOfShift,
+        @NonNull
         Set<String> workingDays
 ) {
     public WorkScheduleRecord {
-        if (beginOfShift == null)
-            throw new IllegalArgumentException("Begin of shift cannot be null.");
-
-        if (endOfShift == null)
-            throw new IllegalArgumentException("End of shift cannot be null.");
 
         if(endOfShift.isBefore(beginOfShift))
             throw new IllegalArgumentException("End of Shift must be after Begin of Shift");
@@ -26,7 +26,7 @@ public record WorkScheduleRecord(
             throw new IllegalArgumentException("Collaborator Shift must be longer than 4 hours");
 
 
-        if (workingDays == null || workingDays.isEmpty())
+        if (workingDays.isEmpty())
             throw new IllegalArgumentException("Working days cannot be null or empty.");
         if (workingDays.size() > 7)
             throw new IllegalArgumentException("There's only 7 working days in tha week");

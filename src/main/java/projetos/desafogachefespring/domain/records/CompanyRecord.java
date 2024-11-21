@@ -1,25 +1,32 @@
 package projetos.desafogachefespring.domain.records;
 
 
+import org.springframework.lang.NonNull;
+
 public record CompanyRecord(
         Long id,
+
+        @NonNull
         String name,
+
+        @NonNull
         String CNPJ,
+
+        @NonNull
         String email,
+
+        @NonNull
         AddressRecord address
 ) {
     public CompanyRecord {
-        if (name == null || name.isBlank()) {
+        if (name.isBlank()) {
             throw new IllegalArgumentException("Company must have name");
         }
-        if (CNPJ == null || CNPJ.isBlank()) {
+        if ( CNPJ.isBlank()) {
             throw new IllegalArgumentException("Company must have CNPJ");
         }
-        if (email == null || email.isBlank()) {
+        if (email.isBlank()) {
             throw new IllegalArgumentException("Company must have email");
-        }
-        if (address == null) {
-            throw new IllegalArgumentException("Company must have address.");
         }
     }
 }

@@ -1,6 +1,7 @@
 package projetos.desafogachefespring.domain.records;
 
 
+import org.springframework.lang.NonNull;
 import projetos.desafogachefespring.domain.entities.Colaborator;
 import projetos.desafogachefespring.domain.entities.Company;
 import projetos.desafogachefespring.domain.entities.Job;
@@ -8,13 +9,27 @@ import projetos.desafogachefespring.domain.entities.Job;
 import java.time.LocalDateTime;
 
 public record LoanRecord(
+        @NonNull
         Colaborator loanedColaborator,
+
         Company loaningCompany,
+
+        @NonNull
         Company loanerCompany,
+
+        @NonNull
         Job loanJob,
+
+        @NonNull
         LocalDateTime startTime,
+
+        @NonNull
         LocalDateTime endTime,
+
+        @NonNull
         double agreedPayRate,
+
+        @NonNull
         String loanStatus
 ) {
     public LoanRecord {

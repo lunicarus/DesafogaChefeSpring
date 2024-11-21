@@ -1,20 +1,25 @@
 package projetos.desafogachefespring.domain.records;
 
+import org.springframework.lang.NonNull;
 import projetos.desafogachefespring.domain.entities.Loan;
 
 public record FinancialReportRecord(
         Long id,
+        @NonNull
         Loan loan,
+        @NonNull
         double hoursWorked,
+        @NonNull
         double totalCost,
+        @NonNull
         double basePay,
+        @NonNull
         double extraPay,
+        @NonNull
         double transportationCost
 ) {
     public FinancialReportRecord {
-        if (loan == null) {
-            throw new IllegalArgumentException("Finanial Report must have associated Loan");
-        }
+
         if (hoursWorked <= 1) {
             throw new IllegalArgumentException("Hours worked must be greater than one.");
         }
