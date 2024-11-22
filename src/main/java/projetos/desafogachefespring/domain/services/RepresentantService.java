@@ -1,11 +1,12 @@
-package projetos.desafogachefespring.services;
+package projetos.desafogachefespring.domain.services;
 
 import projetos.desafogachefespring.domain.entities.Representant;
+import projetos.desafogachefespring.domain.entities.User;
 import projetos.desafogachefespring.domain.records.RepresentantRecord;
+import projetos.desafogachefespring.domain.records.RepresentantRequest;
 import projetos.desafogachefespring.domain.records.UserRecord;
 import org.springframework.stereotype.Service;
 import projetos.desafogachefespring.domain.repositories.RepresentantRepository;
-import projetos.desafogachefespring.domain.services.UserService;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,13 +22,14 @@ public class RepresentantService {
         this.userService = userService;
     }
 
-    public Representant createRepresentant(RepresentantRecord record, UserRecord userRecord) {
+    public Representant createRepresentant(RepresentantRequest request) {
 
-        userService.createUser(userRecord);
-
+        User user = userService.createUser(request.userRecord());
         Representant representant = new Representant();
-        representant.setRepresentantName(record.name());
-        representant.setCompany(record.company());
+        representant.setUser(user);
+
+        representant.setRepresentantName(request.representantRecord().name());
+        representant.setCompany(request.representantRecord().company());
         return representantRepository.save(representant);
     }
 
@@ -39,16 +41,15 @@ public class RepresentantService {
         return representantRepository.findAll();
     }
 
-    public Representant updateRepresentant(Long id, RepresentantRecord record, UserRecord userRecord) {
+    public Representant updateRepresentant(Long id, RepresentantRequest request) {
         return representantRepository.findById(id).map(existingRepresentant -> {
-            // Update user-related fields via UserService
-            if (userRecord != null) {
-                userService.updateUser(userRecord.id(), userRecord);
-            }
 
-            // Update representant-specific fields
-            existingRepresentant.setRepresentantName(record.name());
-            existingRepresentant.setCompany(record.company());
+            User user = userService.createUser(request.userRecord());
+
+            existingRepresentant.setUser(user);
+
+            existingRepresentant.setRepresentantName(request.representantRecord().name());
+            existingRepresentant.setCompany(request.representantRecord().company());
             return representantRepository.save(existingRepresentant);
         }).orElseThrow(() -> new IllegalArgumentException("Representant not found with id: " + id));
     }

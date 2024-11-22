@@ -24,7 +24,7 @@ public class FinancialReportController {
 
     @GetMapping("/{id}")
     public FinancialReport getFinancialReportById(@PathVariable Long id) {
-        return financialReportService.findById(id).orElseThrow(() -> new IllegalArgumentException("FinancialReport not found"));
+        return financialReportService.findById(id).orElseThrow(() -> new IllegalArgumentException("FinancialReport not found with ID: " + id));
     }
 
     @GetMapping("/")
@@ -36,5 +36,4 @@ public class FinancialReportController {
     public FinancialReport updateFinancialReport(@PathVariable Long id, @RequestBody FinancialReport updatedReport) {
         return financialReportService.updateFinancialReport(id, updatedReport);
     }
-
 }

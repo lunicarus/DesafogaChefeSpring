@@ -49,10 +49,11 @@ public class LoanService {
         return loanRepository.findAll();
     }
 
-    public void deleteLoan(Loan loan) {
-        if (loan.getStatus() == LoanStatus.APPROVED || loan.getStatus() == LoanStatus.PENDING) {
-            loan.setStatus(LoanStatus.CANCELED);
-            loanRepository.deleteById(loan.getId());
+    public void deleteLoan(Long id) {
+        Loan delete = findById(id).get();
+        if (delete.getStatus() == LoanStatus.APPROVED || delete.getStatus() == LoanStatus.PENDING) {
+            delete.setStatus(LoanStatus.CANCELED);
+            loanRepository.deleteById(delete.getId());
         }
     }
 
