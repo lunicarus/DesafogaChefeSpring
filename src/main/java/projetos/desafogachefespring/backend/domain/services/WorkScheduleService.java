@@ -1,11 +1,13 @@
 package projetos.desafogachefespring.backend.domain.services;
 
+import org.springframework.stereotype.Service;
 import projetos.desafogachefespring.backend.domain.repositories.WorkScheduleRepository;
 import projetos.desafogachefespring.backend.domain.entities.WorkSchedule;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class WorkScheduleService {
 
     private final WorkScheduleRepository workScheduleRepository;

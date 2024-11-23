@@ -33,19 +33,4 @@ public class FinancialReportService {
     public List<FinancialReport> findAll() {
         return financialReportRepository.findAll();
     }
-
-    public FinancialReport updateFinancialReport(Long id, FinancialReport updatedReport) {
-        return financialReportRepository.findById(id)
-                .map(report -> {
-                    report.setLoan(updatedReport.getLoan());
-                    report.setBasePay(updatedReport.getBasePay());
-                    report.setExtraPay(updatedReport.getExtraPay());
-                    report.setStartDate(updatedReport.getStartDate());
-                    report.setEndDate(updatedReport.getEndDate());
-                    report.setTransportationCost(updatedReport.getTransportationCost());
-                    report.setTotalCost(updatedReport.getTotalCost());
-                    return financialReportRepository.save(report);
-                })
-                .orElseThrow(() -> new IllegalArgumentException("FinancialReport not found"));
-    }
 }

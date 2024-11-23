@@ -7,7 +7,6 @@ import projetos.desafogachefespring.backend.domain.entities.Loan;
 import projetos.desafogachefespring.backend.domain.entities.LoanStatus;
 import projetos.desafogachefespring.backend.domain.records.LoanRecord;
 import projetos.desafogachefespring.backend.domain.repositories.LoanRepository;
-import projetos.desafogachefespring.domain.entities.*;
 
 import java.time.LocalDateTime;
 import java.util.List;

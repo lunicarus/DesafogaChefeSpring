@@ -32,8 +32,4 @@ public class FinancialReportController {
         return financialReportService.findAll();
     }
 
-    @PutMapping("/{id}")
-    public FinancialReport updateFinancialReport(@PathVariable Long id, @RequestBody FinancialReport updatedReport) {
-        return financialReportService.updateFinancialReport(id, updatedReport);
-    }
 }
