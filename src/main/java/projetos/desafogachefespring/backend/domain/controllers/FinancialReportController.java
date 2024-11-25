@@ -1,35 +1,35 @@
 package projetos.desafogachefespring.backend.domain.controllers;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import projetos.desafogachefespring.backend.domain.entities.FinancialReport;
-import projetos.desafogachefespring.backend.domain.entities.Loan;
 import projetos.desafogachefespring.backend.domain.services.FinancialReportService;
-
-import java.util.List;
+import projetos.desafogachefespring.backend.domain.services.PdfService;
 
 @RestController
 @RequestMapping("/financial-reports")
 public class FinancialReportController {
 
     private final FinancialReportService financialReportService;
+    private final PdfService pdfService;
 
-    public FinancialReportController(FinancialReportService financialReportService) {
+    public FinancialReportController(FinancialReportService financialReportService, PdfService pdfService) {
         this.financialReportService = financialReportService;
+        this.pdfService = pdfService;
     }
 
-    @PostMapping("/")
-    public FinancialReport createFinancialReport(@RequestBody Loan loan) {
-        return financialReportService.createFinancialReport(loan);
-    }
+    @GetMapping("/{id}/pdf")
+    public ResponseEntity<byte[]> generateFinancialReportPdf(@PathVariable Long id) {
+        FinancialReport report = financialReportService.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Financial report not found with id: " + id));
 
-    @GetMapping("/{id}")
-    public FinancialReport getFinancialReportById(@PathVariable Long id) {
-        return financialReportService.findById(id).orElseThrow(() -> new IllegalArgumentException("FinancialReport not found with ID: " + id));
-    }
+        byte[] pdfBytes = pdfService.generateFinancialReportPdf(report);
 
-    @GetMapping("/")
-    public List<FinancialReport> getAllFinancialReports() {
-        return financialReportService.findAll();
+        return ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_PDF)
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=financial_report_" + id + ".pdf")
+                .body(pdfBytes);
     }
-
 }
