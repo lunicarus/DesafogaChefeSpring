@@ -8,13 +8,14 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
+@Table(name = "Representants")
 public class Representant{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToOne(optional = false, cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(table = "user", name = "id", nullable = false)
     private User user;
 
     @OneToOne(optional = false)

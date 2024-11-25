@@ -12,6 +12,7 @@ import java.util.List;
 @Setter
 @Getter
 @NoArgsConstructor
+@Table(name = "jobs")
 public class Job {
 
     @Id

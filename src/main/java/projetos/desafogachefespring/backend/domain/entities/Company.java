@@ -7,6 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
+@Table(name="companies")
 public class Company {
     @Id
     private Long id;

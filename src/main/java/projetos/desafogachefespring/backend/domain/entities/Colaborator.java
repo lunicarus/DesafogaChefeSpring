@@ -7,6 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
+@Table(name="collaborators")
 public class Colaborator{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,11 +18,11 @@ public class Colaborator{
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "work_schedule_id")
+    @JoinColumn(table="work_schedules", name = "id")
     private WorkSchedule workSchedule;
 
     @ManyToOne
-    @JoinColumn(name = "job_id")
+    @JoinColumn(table = "job", name = "id")
     private Job job;
 
     @Column(nullable = false)
